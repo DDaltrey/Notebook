@@ -2,7 +2,7 @@
   "name": "evernote-clone",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ddaltrey.github.io/evernote-clone",
+  "homepage": "https://ddaltrey.github.io/Evernote-clone",
   "dependencies": {
     "cra-template": "1.2.0",
     "firebase": "^11.2.0",
