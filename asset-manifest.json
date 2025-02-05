@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Evernote-clone/static/css/main.90df93c0.css",
-    "main.js": "/Evernote-clone/static/js/main.a810c7d5.js",
+    "main.css": "/Evernote-clone/static/css/main.3d173434.css",
+    "main.js": "/Evernote-clone/static/js/main.cfbd6728.js",
     "static/js/488.8804c87e.chunk.js": "/Evernote-clone/static/js/488.8804c87e.chunk.js",
     "index.html": "/Evernote-clone/index.html",
-    "main.90df93c0.css.map": "/Evernote-clone/static/css/main.90df93c0.css.map",
-    "main.a810c7d5.js.map": "/Evernote-clone/static/js/main.a810c7d5.js.map",
+    "main.3d173434.css.map": "/Evernote-clone/static/css/main.3d173434.css.map",
+    "main.cfbd6728.js.map": "/Evernote-clone/static/js/main.cfbd6728.js.map",
     "488.8804c87e.chunk.js.map": "/Evernote-clone/static/js/488.8804c87e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.90df93c0.css",
-    "static/js/main.a810c7d5.js"
+    "static/css/main.3d173434.css",
+    "static/js/main.cfbd6728.js"
   ]
 }
