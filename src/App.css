@@ -1,38 +1,261 @@
-.App {
-  text-align: center;
+/* Reset Default Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Main App Layout */
+.app-container {
   display: flex;
-  flex-direction: column;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #222; /* Dark theme like Evernote */
+  padding: 20px;
+  color: white;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Sidebar Headings */
+.sidebar h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+/* Primary Buttons */
+.primary-btn {
+  background-color: #3ba55c; /* Evernote Green */
+  color: white;
+  width: 100%;
+  margin-bottom:10px;margin-top:10px;
+}
+
+.primary-btn:hover {
+  background-color: #2e8540;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #d9534f;
+  color: white;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  background: #c9302c;
+}
+
+/* Small Buttons */
+.small-btn {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+button.delete-btn {
+  background-color: transparent;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 10px;
+  color: white;
+}
+/* Section Headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.section-header h3 {
+  font-size: 14px;
+  margin: 0;
+}
+/* Add Button */
+.add-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Input Fields */
+.sidebar input,
+.search-bar {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.logout{background-color:#3ba55c;width:100%;margin-bottom:10px;}
+/* Inline Input */
+.inline-input {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Adjust spacing between input and button */
+}
+.add-bookpage{
+  margin-bottom:5px;
+}
+.inline-input input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.inline-input button {
+  background: #3ba55c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.inline-input button:hover {
+  background: #2e8540;
+}
+/* List Styles */
+.existing-list {
+  list-style: none;
+}
+
+.existing-list li {
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.existing-list li:hover {
+  background: #444;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  background: #f4f4f4;
+}
+
+/* Note Container */
+.note-container {
+  max-width: 700px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.note-container h2 {
+  color: #2d2d2d;
+  margin-bottom: 10px;
+}
+
+/* Textarea Input */
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+/* Save Button */
+.save-btn {
+  background: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.save-btn:hover {
+  background: #45a049;
+}
+
+.notes-list {
+  list-style: none;
+  padding: 0;
+}
+
+.note-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.note-content {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.note-text {
+  font-size: 16px;
+  white-space: normal;
+  overflow: hidden;
+}
+
+.show-more-btn {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.note-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+  background: #3ba55c;
+  border: none;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.edit-btn:hover, .delete-btn:hover {
+  background: #ddd;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button.save-button {
+  background: #3ba55c;
+  color: white;
+  margin: 10px;
+  margin-left: 0px;
+}
+.note-item .save-button{margin-left:10px;}
+.note-item .quill {
+  flex: 1 1;
 }

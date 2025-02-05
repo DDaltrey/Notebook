@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./firebaseConfig";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, deleteDoc } from "firebase/firestore";
 
 const Pages = ({ workbookId, onSelectPage }) => {
-  const [pageName, setPageName] = useState("");
   const [pages, setPages] = useState([]);
 
   // Fetch pages inside the selected workbook
@@ -21,22 +20,15 @@ const Pages = ({ workbookId, onSelectPage }) => {
     }
   };
 
-  // Function to create a new page
-  const createPage = async () => {
-    if (pageName.trim() === "") {
-      alert("Page name cannot be empty!");
-      return;
-    }
+  // Function to delete a page
+  const deletePage = async (pageId) => {
+    if (!window.confirm("Are you sure you want to delete this page?")) return;
 
     try {
-      await addDoc(collection(db, `workbooks/${workbookId}/pages`), {
-        name: pageName,
-      });
-
-      setPageName("");
+      await deleteDoc(doc(db, `workbooks/${workbookId}/pages`, pageId));
       fetchPages(); // Refresh the list
     } catch (error) {
-      console.error("Error creating page:", error);
+      console.error("Error deleting page:", error);
     }
   };
 
@@ -46,20 +38,12 @@ const Pages = ({ workbookId, onSelectPage }) => {
 
   return (
     <div>
-      <h2>Pages in Selected Workbook</h2>
-      <input
-        type="text"
-        placeholder="Enter page name"
-        value={pageName}
-        onChange={(e) => setPageName(e.target.value)}
-      />
-      <button onClick={createPage}>Create Page</button>
-
       <h3>Existing Pages:</h3>
       <ul>
         {pages.map((pg) => (
-          <li key={pg.id} onClick={() => onSelectPage(pg.id)}>
-            {pg.name}
+          <li key={pg.id}>
+            <span onClick={() => onSelectPage(pg.id)}>{pg.name}</span>
+            <button className="delete-btn" onClick={() => deletePage(pg.id)}>🗑️</button>
           </li>
         ))}
       </ul>
