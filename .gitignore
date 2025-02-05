@@ -20,7 +20,7 @@
 .env
 src/firebaseConfig.js
 .env
-src/login.js
+src/Login.js
 
 npm-debug.log*
 yarn-debug.log*
