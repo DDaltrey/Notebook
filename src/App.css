@@ -9,24 +9,53 @@
 /* Main App Layout */
 .app-container {
   display: flex;
-  height: 100vh;
+  min-height:100vh
 }
-
+.pageTitle{text-align: center;}
 /* Sidebar */
 .sidebar {
   width: 250px;
   background: #222; /* Dark theme like Evernote */
   padding: 20px;
   color: white;
-  height: 100vh;
   overflow-y: auto;
 }
+.pageList,.workbookList{display:flex;flex-direction: row;padding-top:10px;padding-bottom:10px;}
 
+h1.pageTitle{padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: white;
+  box-shadow: #00000031 5px 5px 11px 0px;
+  }
 /* Sidebar Headings */
 .sidebar h2 {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
 }
 
 /* Buttons */
@@ -45,25 +74,14 @@ button {
 
 /* Primary Buttons */
 .primary-btn {
-  background-color: #3ba55c; /* Evernote Green */
+  background-color: #22027a; /* Evernote Green */
   color: white;
   width: 100%;
   margin-bottom:10px;margin-top:10px;
 }
 
 .primary-btn:hover {
-  background-color: #2e8540;
-}
-
-/* Logout Button */
-.logout-btn {
-  background: #d9534f;
-  color: white;
-  width: 100%;
-}
-
-.logout-btn:hover {
-  background: #c9302c;
+  background-color: #22027a;
 }
 
 /* Small Buttons */
@@ -106,7 +124,7 @@ button.delete-btn {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.logout{background-color:#3ba55c;width:100%;margin-bottom:10px;}
+.logout{background-color:#22027a;width:100%;margin-bottom:10px;color:white;}
 /* Inline Input */
 .inline-input {
   display: flex;
@@ -124,7 +142,7 @@ button.delete-btn {
 }
 
 .inline-input button {
-  background: #3ba55c;
+  background: #22027a;
   color: white;
   border: none;
   padding: 6px 10px;
@@ -153,10 +171,11 @@ button.delete-btn {
 /* Main Content */
 .main-content {
   flex-grow: 1;
-  padding: 40px;
   background: #f4f4f4;
 }
-
+.main-content.logged-in .contentContainer {
+  padding: 20px;
+}
 /* Note Container */
 .note-container {
   max-width: 700px;
@@ -237,7 +256,7 @@ textarea {
 }
 
 .edit-btn, .delete-btn {
-  background: #3ba55c;
+  background: #22027a;
   border: none;
   padding: 10px 10px;
   cursor: pointer;
@@ -250,7 +269,7 @@ textarea {
   background: #ddd;
 }
 button.save-button {
-  background: #3ba55c;
+  background: #22027a;
   color: white;
   margin: 10px;
   margin-left: 0px;
@@ -258,4 +277,14 @@ button.save-button {
 .note-item .save-button{margin-left:10px;}
 .note-item .quill {
   flex: 1 1;
+}
+input.titleInput:focus {
+  outline: none !important;
+}
+
+input.titleInput {
+  border: 0px !important;
+  background-color: transparent;
+  margin: 10px;
+  font-size: 32px;
 }

@@ -1,0 +1,93 @@
+/* Fullscreen Centered Container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #2fcff7, #6c07f1);
+  }
+  
+  /* White Login Box */
+  .login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Login Title */
+  .login-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Google Login Button */
+  .login-btn {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: 0.3s ease;
+  }
+  
+  .login-btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* Social Icons */
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin: 0 8px;
+    cursor: pointer;
+  }
+  
+  .facebook {
+    background: #3b5998;
+  }
+  
+  .twitter {
+    background: #1da1f2;
+  }
+  
+  .google {
+    background: #db4437;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    background: #ff3b30;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 15px;
+    transition: 0.3s ease;
+  }
+  
+  .logout-btn:hover {
+    opacity: 0.8;
+  }
+  

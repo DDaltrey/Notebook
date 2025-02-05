@@ -141,6 +141,7 @@ const App = () => {
     <div className="app-container">
       {user && (
         <Sidebar
+        user={user}
           onLogout={handleLogout}
           onSelectWorkbook={(id) => {
             setSelectedWorkbook(id);
@@ -157,14 +158,15 @@ const App = () => {
         />
       )}
 
-      <div className="main-content">
+<div className={user ? "main-content logged-in" : "main-content login-screen"}>
         {!user ? (
           <Login />
         ) : (
           selectedPage && (
             <>
               
-              <Notes workbookId={selectedWorkbook} pageId={selectedPage} />
+              <Notes workbookId={selectedWorkbook} page={pages.find(p => p.id === selectedPage)} />
+
             </>
           )
         )}

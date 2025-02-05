@@ -5,15 +5,17 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "./App.css";
 
-const Notes = ({ workbookId, pageId }) => {
+const Notes = ({ workbookId, page }) => {
   const [note, setNote] = useState("");
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
-  const [titles, setTitles] = useState([]);
   const [editingNoteId, setEditingNoteId] = useState(null);
   const [editingText, setEditingText] = useState("");
   const [expandedNotes, setExpandedNotes] = useState({});
-  const [pagesExist, setPagesExist] = useState(false); // Track if pages exist
+  const [pagesExist, setPagesExist] = useState(false);
+
+  const pageId = page?.id;
+  const pageName = page?.name || "Selected Page"; // ✅ Now dynamically displays the selected page name
 
   useEffect(() => {
     if (workbookId) {
@@ -27,7 +29,6 @@ const Notes = ({ workbookId, pageId }) => {
     }
   }, [workbookId, pageId]);
 
-  // Check if pages exist in the selected workbook
   const checkPagesExist = async () => {
     try {
       const pagesCollection = collection(db, `workbooks/${workbookId}/pages`);
@@ -40,14 +41,13 @@ const Notes = ({ workbookId, pageId }) => {
   };
 
   const fetchNotes = async () => {
-    if (!workbookId || !pageId) return; // Prevent fetching if nothing is selected
+    if (!workbookId || !pageId) return;
 
     try {
       const q = query(
         collection(db, `workbooks/${workbookId}/pages/${pageId}/notes`),
-        orderBy("lastModified", "desc") // Order by last modified, newest first
+        orderBy("lastModified", "desc")
       );
-
       const querySnapshot = await getDocs(q);
       const notesArray = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -58,7 +58,6 @@ const Notes = ({ workbookId, pageId }) => {
       console.error("Error fetching notes:", error);
     }
   };
-  
 
   const addNote = async () => {
     if (note.trim() === "") return alert("Note cannot be empty!");
@@ -67,8 +66,8 @@ const Notes = ({ workbookId, pageId }) => {
       await addDoc(collection(db, `workbooks/${workbookId}/pages/${pageId}/notes`), {
         title: title,
         text: note,
-        createdAt: new Date().toISOString(), // Save creation timestamp
-        lastModified: new Date().toISOString(), // Save last modified timestamp
+        createdAt: new Date().toISOString(),
+        lastModified: new Date().toISOString(),
       });
       setNote("");
       setTitle("");
@@ -77,13 +76,13 @@ const Notes = ({ workbookId, pageId }) => {
       console.error("Error adding note:", error);
     }
   };
-  const startEditing = (noteId, text, last) => {
+
+  const startEditing = (noteId, text) => {
     setEditingNoteId(noteId);
     setEditingText(text);
   };
 
   const saveEditedNote = async () => {
-    
     if (editingText.trim() === "") {
       alert("Note cannot be empty!");
       return;
@@ -93,17 +92,16 @@ const Notes = ({ workbookId, pageId }) => {
       const noteRef = doc(db, `workbooks/${workbookId}/pages/${pageId}/notes`, editingNoteId);
       await updateDoc(noteRef, { 
         text: editingText,
-        lastModified: new Date().toISOString(), // Update last modified timestamp 
-    });
-      
+        lastModified: new Date().toISOString(),
+      });
       setEditingNoteId(null);
       setEditingText("");
-      
       fetchNotes();
     } catch (error) {
       console.error("Error updating note:", error);
     }
   };
+
   const deleteNote = async (noteId) => {
     if (!window.confirm("Are you sure you want to delete this note?")) return;
 
@@ -148,20 +146,23 @@ const Notes = ({ workbookId, pageId }) => {
   }
 
   return (
-    <div className="container">
-      <h2>Notes in Selected Page</h2>
-      <input
+    <div clasName="pageContainer">
+    <h1 className="pageTitle">Notes in {pageName}</h1>
+    <div className="contentContainer">
+      
+      
+      <input className="titleInput"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Write a Title..."
       />
       <ReactQuill value={note} onChange={setNote} placeholder="Write a note..." />
-      <button class="save-button" onClick={addNote}>Save Note</button>
-
+      <button className="save-button" onClick={addNote}>Save Note</button>
+<div className="notesContainer">
       <h3>Saved Notes:</h3>
       <ul className="notes-list">
         {notes.map((n) => {
-          const firstLine = n.text.split("\n")[0]; // Get first line of note
+          const firstLine = n.text.split("\n")[0];
           const isExpanded = expandedNotes[n.id];
           const title = n.title;
 
@@ -170,22 +171,22 @@ const Notes = ({ workbookId, pageId }) => {
               {editingNoteId === n.id ? (
                 <>
                   <ReactQuill value={editingText} onChange={setEditingText} />
-                  <button class="save-button" onClick={saveEditedNote}>Save</button>
-                  <button class="save-button" onClick={() => setEditingNoteId(null)}>Cancel</button>
+                  <button className="save-button" onClick={saveEditedNote}>Save</button>
+                  <button className="save-button" onClick={() => setEditingNoteId(null)}>Cancel</button>
                 </>
               ) : (
                 <>
                   <div className="note-content">
-                  <div
-                      className="note-text"
-                      style={{ fontSize: "16px", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}
+                    <h1
+                      className="note-text-title"
+                      style={{ overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}
                       dangerouslySetInnerHTML={{ __html: title }}
-                    ></div>
-                    <div
+                    ></h1>
+                    <p
                       className="note-text"
                       style={{ fontSize: "16px", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}
                       dangerouslySetInnerHTML={{ __html: isExpanded ? n.text : firstLine }}
-                    ></div>
+                    ></p>
                     <small>Last Modified: {new Date(n.lastModified).toLocaleString()}</small>
                     {n.text !== firstLine && (
                       <button className="show-more-btn" onClick={() => toggleExpand(n.id)}>
@@ -203,6 +204,8 @@ const Notes = ({ workbookId, pageId }) => {
           );
         })}
       </ul>
+      </div>
+    </div>
     </div>
   );
 };

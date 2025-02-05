@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Sidebar = ({ 
+  user,
   onLogout, 
   onSelectWorkbook, 
   onSelectPage, 
@@ -10,13 +11,14 @@ const Sidebar = ({
   deleteWorkbook, 
   deletePage, 
   workbooks, 
-  pages 
+  pages,
 }) => {
   const [showWorkbookInput, setShowWorkbookInput] = useState(false);
   const [newWorkbookName, setNewWorkbookName] = useState("");
 
   const [showPageInput, setShowPageInput] = useState(false);
   const [newPageName, setNewPageName] = useState("");
+  
 
   const handleCreateWorkbook = () => {
     if (newWorkbookName.trim() !== "") {
@@ -36,7 +38,16 @@ const Sidebar = ({
 
   return (
     <div className="sidebar">
-      <h2>Evernote Clone</h2>
+      {/* User Info Section */}
+      {user && (
+        <div className="user-info">
+          <img src={user.photoURL} alt="User Avatar" className="avatar" />
+          <div>
+            <h3>{user.displayName}</h3>
+            <p>{user.email}</p>
+          </div>
+        </div>
+      )}
       <button className="danger-btn logout" onClick={onLogout}>Logout</button>
 
       <input type="text" className="search-bar" placeholder="Search notes..." />
@@ -62,8 +73,8 @@ const Sidebar = ({
 
           <ul>
             {workbooks.map((wb) => (
-              <li key={wb.id}>
-                <span onClick={() => onSelectWorkbook(wb.id)}>{wb.name}</span>
+              <li className="workbookList" key={wb.id}>
+                <h3 onClick={() => onSelectWorkbook(wb.id)}>{wb.name}</h3>
                 <button className="delete-btn" onClick={() => deleteWorkbook(wb.id)}>🗑</button>
               </li>
             ))}
@@ -94,8 +105,8 @@ const Sidebar = ({
 
           <ul>
             {pages.map((pg) => (
-              <li key={pg.id}>
-                <span onClick={() => onSelectPage(pg.id)}>{pg.name}</span>
+              <li className="pageList" key={pg.id}>
+                <h3 onClick={() => onSelectPage(pg.id)}>{pg.name}</h3>
                 <button className="delete-btn" onClick={() => deletePage(selectedWorkbook, pg.id)}>🗑</button>
               </li>
             ))}
