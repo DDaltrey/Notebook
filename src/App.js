@@ -148,6 +148,7 @@ const App = () => {
             fetchPages(id);
           }}
           onSelectPage={setSelectedPage}
+          selectedPage={selectedPage}
           selectedWorkbook={selectedWorkbook}
           createWorkbook={createWorkbook}
           createPage={createPage}
