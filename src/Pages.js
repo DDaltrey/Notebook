@@ -1,11 +1,13 @@
+// Pages.js
 import React, { useState, useEffect } from "react";
 import { db } from "./firebaseConfig";
-import { collection, addDoc, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { Link, useParams } from "react-router-dom";
 
-const Pages = ({ workbookId, onSelectPage }) => {
+const Pages = () => {
+  const { workbookId } = useParams();
   const [pages, setPages] = useState([]);
 
-  // Fetch pages inside the selected workbook
   const fetchPages = async () => {
     try {
       const q = collection(db, `workbooks/${workbookId}/pages`);
@@ -20,13 +22,11 @@ const Pages = ({ workbookId, onSelectPage }) => {
     }
   };
 
-  // Function to delete a page
   const deletePage = async (pageId) => {
     if (!window.confirm("Are you sure you want to delete this page?")) return;
-
     try {
       await deleteDoc(doc(db, `workbooks/${workbookId}/pages`, pageId));
-      fetchPages(); // Refresh the list
+      fetchPages();
     } catch (error) {
       console.error("Error deleting page:", error);
     }
@@ -38,12 +38,13 @@ const Pages = ({ workbookId, onSelectPage }) => {
 
   return (
     <div>
-      <h3>Existing Pages:</h3>
       <ul>
         {pages.map((pg) => (
           <li key={pg.id}>
-            <span onClick={() => onSelectPage(pg.id)}>{pg.name}</span>
-            <button className="delete-btn" onClick={() => deletePage(pg.id)}>🗑️</button>
+            <Link to={`/workbook/${workbookId}/page/${pg.id}`}>{pg.name}</Link>
+            <button className="delete-btn" onClick={() => deletePage(pg.id)}>
+              🗑️
+            </button>
           </li>
         ))}
       </ul>
