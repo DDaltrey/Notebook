@@ -123,7 +123,7 @@ const App = () => {
   };
 
   return (
-    <Router basename="/Notebook/">
+    <Router basename="/Notebook">
       <div className="app-container">
         {user && (
           <Sidebar

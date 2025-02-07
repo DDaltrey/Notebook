@@ -2,7 +2,7 @@
   "name": "Personal AIO",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ddaltrey.github.io/Notebook",
+  "homepage": "https://ddaltrey.github.io/Notebook/",
   "dependencies": {
     "cra-template": "1.2.0",
     "firebase": "^11.2.0",
