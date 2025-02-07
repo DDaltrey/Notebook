@@ -21,7 +21,7 @@ const Sidebar = ({
 
   // Extract the selected workbook id from the URL.
   // The expected URL is either "/workbook/:workbookId" or "/workbook/:workbookId/page/:pageId" etc.
-  const pathParts = location.pathname.split("/Notebook/");
+  const pathParts = location.pathname.split("/");
   const selectedWorkbook = pathParts[1] === "workbook" && pathParts[2] ? pathParts[2] : null;
 
   const [showWorkbookInput, setShowWorkbookInput] = useState(false);
@@ -130,7 +130,7 @@ const Sidebar = ({
                   <div className="nameControls">
                     <h3
                       className="pageTitle"
-                      onClick={() => navigate(`/Notebook/workbook/${wb.id}`)}
+                      onClick={() => navigate(`/workbook/${wb.id}`)}
                     >
                       📒 {wb.name}
                     </h3>
@@ -154,7 +154,7 @@ const Sidebar = ({
                     <h3
                       className="pageTitle"
                       onClick={() =>
-                        navigate(`/Notebook/workbook/${pg.workbookId}/page/${pg.id}`)
+                        navigate(`/workbook/${pg.workbookId}/page/${pg.id}`)
                       }
                     >
                       📄 {pg.name}
@@ -201,7 +201,7 @@ const Sidebar = ({
                 <div className="nameControls">
                   <h3
                     className="pageTitle"
-                    onClick={() => navigate(`/Notebook/workbook/${wb.id}`)}
+                    onClick={() => navigate(`/workbook/${wb.id}`)}
                   >
                     📒 {wb.name}
                   </h3>
@@ -221,7 +221,7 @@ const Sidebar = ({
               <h2 className="selected-workbook-title">
                 📂{" "}
                 {workbooks.find((wb) => wb.id === selectedWorkbook)?.name}
-                <button className="clear-workbook-btn" onClick={() => navigate("/Notebook")}>
+                <button className="clear-workbook-btn" onClick={() => navigate("/")}>
                   ✖
                 </button>
               </h2>
@@ -253,7 +253,7 @@ const Sidebar = ({
                   <h3
                     className="pageTitle"
                     onClick={() =>
-                      navigate(`/Notebook/workbook/${pg.workbookId}/page/${pg.id}`)
+                      navigate(`/workbook/${pg.workbookId}/page/${pg.id}`)
                     }
                   >
                     📄 {pg.name}

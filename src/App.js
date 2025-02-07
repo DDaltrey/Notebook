@@ -144,7 +144,7 @@ const App = () => {
           ) : (
             <Routes>
               {/* Dashboard route when no workbook/page is selected */}
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Dashboard user={user}/>} />
               
               {/* Route to display the Pages list for a selected workbook */}
               <Route path="/workbook/:workbookId" element={<Pages />} />

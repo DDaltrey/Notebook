@@ -1,26 +1,31 @@
 // Dashboard.js
 import React, { useState, useEffect } from "react";
 import { db } from "./firebaseConfig";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
   const [recentNotes, setRecentNotes] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchRecentNotes();
-  }, []);
+    if (user) {
+      fetchRecentNotes(user.uid);
+    }
+  }, [user]);
 
-  const fetchRecentNotes = async () => {
+  const fetchRecentNotes = async (userId) => {
     try {
-      const workbooksSnapshot = await getDocs(collection(db, "workbooks"));
+      // Query workbooks that belong to the logged-in user
+      const workbooksQuery = query(collection(db, "workbooks"), where("userId", "==", userId));
+      const workbooksSnapshot = await getDocs(workbooksQuery);
+      
       let allNotes = [];
+
       for (const workbookDoc of workbooksSnapshot.docs) {
-        const pagesSnapshot = await getDocs(
-          collection(db, `workbooks/${workbookDoc.id}/pages`)
-        );
+        const pagesSnapshot = await getDocs(collection(db, `workbooks/${workbookDoc.id}/pages`));
+
         for (const pageDoc of pagesSnapshot.docs) {
           const notesQuery = query(
             collection(db, `workbooks/${workbookDoc.id}/pages/${pageDoc.id}/notes`),
@@ -33,10 +38,15 @@ const Dashboard = () => {
             workbookId: workbookDoc.id,
             pageId: pageDoc.id,
           }));
+
           allNotes = [...allNotes, ...pageNotes];
         }
       }
+
+      // Sort notes by lastModified (most recent first)
       allNotes.sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified));
+
+      // Keep only the top 5 most recent notes
       setRecentNotes(allNotes.slice(0, 5));
     } catch (error) {
       console.error("Error fetching recent notes:", error);
@@ -58,7 +68,7 @@ const Dashboard = () => {
                 key={note.id}
                 className="recent-note-item"
                 onClick={() =>
-                  navigate(`/Notebook/workbook/${note.workbookId}/page/${note.pageId}/note/${note.id}`)
+                  navigate(`/workbook/${note.workbookId}/page/${note.pageId}/note/${note.id}`)
                 }
               >
                 <strong>{note.title}</strong>
