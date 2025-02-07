@@ -260,7 +260,7 @@ const Sidebar = ({
                   </h3>
                   <button
                     className="delete-btn"
-                    onClick={() => deletePage(selectedWorkbook, pg.id)}
+                    onClick={() => handleDeletePage(pg.workbookId, pg.id)}
                   >
                     🗑
                   </button>
