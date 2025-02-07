@@ -124,7 +124,7 @@ const Notes = () => {
       );
       clearEditingState();
       fetchNotes();
-      navigate(`/workbook/${workbookId}/page/${pageId}/note/${docRef.id}`);
+      navigate(`/Notebook/workbook/${workbookId}/page/${pageId}/note/${docRef.id}`);
     } catch (error) {
       console.error("Error adding note:", error);
     }
@@ -135,7 +135,7 @@ const Notes = () => {
     setCurrentTitle(note.title);
     setCurrentText(note.text);
     setSelectedNote(null);
-    navigate(`/workbook/${workbookId}/page/${pageId}`);
+    navigate(`/Notebook/workbook/${workbookId}/page/${pageId}`);
   };
 
   const saveEditedNote = async () => {
@@ -188,7 +188,7 @@ const Notes = () => {
   const showNote = (note) => {
     setSelectedNote(note);
     clearEditingState();
-    navigate(`/workbook/${workbookId}/page/${pageId}/note/${note.id}`);
+    navigate(`/Notebook/workbook/${workbookId}/page/${pageId}/note/${note.id}`);
   };
 
   if (!workbookId) {

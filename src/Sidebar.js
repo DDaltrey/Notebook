@@ -130,7 +130,7 @@ const Sidebar = ({
                   <div className="nameControls">
                     <h3
                       className="pageTitle"
-                      onClick={() => navigate(`/workbook/${wb.id}`)}
+                      onClick={() => navigate(`/Notebook/workbook/${wb.id}`)}
                     >
                       📒 {wb.name}
                     </h3>
@@ -154,7 +154,7 @@ const Sidebar = ({
                     <h3
                       className="pageTitle"
                       onClick={() =>
-                        navigate(`/workbook/${pg.workbookId}/page/${pg.id}`)
+                        navigate(`/Notebook/workbook/${pg.workbookId}/page/${pg.id}`)
                       }
                     >
                       📄 {pg.name}
@@ -201,7 +201,7 @@ const Sidebar = ({
                 <div className="nameControls">
                   <h3
                     className="pageTitle"
-                    onClick={() => navigate(`/workbook/${wb.id}`)}
+                    onClick={() => navigate(`/Notebook/workbook/${wb.id}`)}
                   >
                     📒 {wb.name}
                   </h3>
@@ -221,7 +221,7 @@ const Sidebar = ({
               <h2 className="selected-workbook-title">
                 📂{" "}
                 {workbooks.find((wb) => wb.id === selectedWorkbook)?.name}
-                <button className="clear-workbook-btn" onClick={() => navigate("/")}>
+                <button className="clear-workbook-btn" onClick={() => navigate("/Notebook")}>
                   ✖
                 </button>
               </h2>
@@ -253,7 +253,7 @@ const Sidebar = ({
                   <h3
                     className="pageTitle"
                     onClick={() =>
-                      navigate(`/workbook/${pg.workbookId}/page/${pg.id}`)
+                      navigate(`/Notebook/workbook/${pg.workbookId}/page/${pg.id}`)
                     }
                   >
                     📄 {pg.name}

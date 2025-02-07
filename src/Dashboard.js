@@ -58,7 +58,7 @@ const Dashboard = () => {
                 key={note.id}
                 className="recent-note-item"
                 onClick={() =>
-                  navigate(`/workbook/${note.workbookId}/page/${note.pageId}/note/${note.id}`)
+                  navigate(`/Notebook/workbook/${note.workbookId}/page/${note.pageId}/note/${note.id}`)
                 }
               >
                 <strong>{note.title}</strong>
