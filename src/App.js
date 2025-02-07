@@ -123,7 +123,7 @@ const App = () => {
   };
 
   return (
-    <Router basename="/Notebook">
+    <Router basename="/Notebook/">
       <div className="app-container">
         {user && (
           <Sidebar
@@ -154,7 +154,7 @@ const App = () => {
               <Route path="/workbook/:workbookId/page/:pageId/note/:noteId" element={<Notes />} />
               
               {/* Redirect any unmatched route to the dashboard */}
-              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="*" element={<Navigate to="/Notebook/" />} />
             </Routes>
           )}
         </div>

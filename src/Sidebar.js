@@ -21,7 +21,7 @@ const Sidebar = ({
 
   // Extract the selected workbook id from the URL.
   // The expected URL is either "/workbook/:workbookId" or "/workbook/:workbookId/page/:pageId" etc.
-  const pathParts = location.pathname.split("/");
+  const pathParts = location.pathname.split("/Notebook/");
   const selectedWorkbook = pathParts[1] === "workbook" && pathParts[2] ? pathParts[2] : null;
 
   const [showWorkbookInput, setShowWorkbookInput] = useState(false);
