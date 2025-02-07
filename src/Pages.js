@@ -38,16 +38,7 @@ const Pages = () => {
 
   return (
     <div>
-      <ul>
-        {pages.map((pg) => (
-          <li key={pg.id}>
-            <Link to={`/workbook/${workbookId}/page/${pg.id}`}>{pg.name}</Link>
-            <button className="delete-btn" onClick={() => deletePage(pg.id)}>
-              🗑️
-            </button>
-          </li>
-        ))}
-      </ul>
+      
     </div>
   );
 };
